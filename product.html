@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antartica - Temp Spoofer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0e0e0e, #1a0404);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            max-width: 120px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: #66ccff;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .logo svg {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #66ccff;
+        }
+        
+        .product-section {
+            padding: 50px 5%;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .browse-title {
+            color: #ff3333;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-title {
+            color: #66ccff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.4);
+        }
+        
+        .product-description {
+            color: #cccccc;
+            margin-bottom: 4rem;
+        }
+        
+        .product-display {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .product-card {
+            border: 2px solid #66ccff;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+            overflow: hidden;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0 0 25px rgba(102, 204, 255, 0.3);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 35px rgba(102, 204, 255, 0.5);
+        }
+        
+        .product-image {
+            height: 280px;
+            background-color: #003366;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+        }
+        
+        .product-content {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .product-name {
+            color: #66ccff;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.8);
+            padding-top:1rem;
+            padding-left: 1rem;
+        }
+        
+        .product-tagline {
+            color: #99ddff;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-audience {
+            color: #99ddff;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .product-details {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        .price-info p:first-child {
+            color: #999999;
+            font-size: 0.9rem;
+        }
+        
+        .price {
+            color: #66ccff;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.7);
+        }
+        
+        .feature-badge {
+            background-color: rgba(0, 51, 102, 0.3);
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .feature-badge p {
+            color: #99ddff;
+            font-size: 0.9rem;
+        }
+        
+        .purchase-button {
+            display: block;
+            width: 100%;
+            padding: 1rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #66ccff, #3399ff);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(102, 204, 255, 0.5);
+            transition: all 0.3s ease;
+            z-index: 999;
+            position: relative;
+        }
+        
+        .purchase-button:hover {
+/*            transform: translateY(-2px);*/
+            box-shadow: 0 0 20px rgba(102, 204, 255, 0.8);
+        }
+        
+        .feature-tag {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+        }
+        
+        .tag-safe {
+            top: 15%;
+            left: 0;
+            border-left: 3px solid #66ccff;
+        }
+        
+        .tag-undetected {
+            bottom: 15%;
+            right: 0;
+            border-right: 3px solid #ff3366;
+        }
+        
+        .flame {
+            position: absolute;
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            filter: blur(8px);
+            background: linear-gradient(to top, #ff3300, #ffcc00);
+            opacity: 0.4;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            z-index: 1;
+            will-change: transform, opacity;
+        }
+        
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(102, 204, 255, 0.1) 70%, transparent 100%);
+            animation: flicker 4s infinite ease-in-out;
+            z-index: 1;
+            will-change: opacity;
+        }
+        .product-image img {
+            width: 100%;
+           height: 100%;
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 0.8; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.8; }
+        }
+        
+        @keyframes flame {
+            0% { 
+                transform: rotate(45deg) scale(1); 
+                opacity: 0.4;
+            }
+            100% { 
+                transform: rotate(45deg) scale(1.1); 
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particle-container"></div>
+    
+    <header>
+        <a href="index.html" class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 5L35 20L20 35L5 20L20 5Z" fill="#111111" stroke="#66ccff" stroke-width="2"/>
+                <path d="M20 12L28 20L20 28L12 20L20 12Z" fill="#66ccff"/>
+            </svg>
+            Antartica
+        </a>
+        <nav>
+            <ul>
+                <li><a href="">
+                    <img style="width:40px" src="discord.png">
+                </a></li>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="product.html">PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="product-section">
+        <div class="container">
+            <h2 class="browse-title">Browse</h2>
+            <h1 class="product-title">Our most popular products</h1>
+            <p class="product-description">Discover all of our software and find your perfect fit.</p>
+            
+            <div class="product-display">
+                <div class="product-card">
+                    <div class="flame" style="width: 48px; height: 64px; top: 20%; left: -16px;"></div>
+                    <div class="flame" style="width: 48px; height: 64px; top: 30%; right: -16px;"></div>
+                    <div class="glow"></div>
+                    
+                    <div class="product-image">
+                      <!--   <div class="product-content">
+                            <h2 class="product-name">REVISED TEMP</h2>
+                            <p class="product-tagline">The best HWID SPOOFER on The Market</p>
+                            <p class="product-audience">Product made especially for Cheaters</p>
+                        </div>
+                        
+                        <div class="feature-tag tag-safe">100% SAFE</div>
+                        <div class="feature-tag tag-undetected">UNDETECTED</div> -->
+                        <img src="logo_1.png">
+                    </div>
+
+                    <h2 class="product-name">REVISED TEMP</h2>
+                    <div class="product-details">
+
+                        <div class="price-info">
+                            <p>Starting at:</p>
+                            <p class="price">$4.99</p>
+                        </div>
+                        <div class="feature-badge">
+                            <p>Advanced Protection</p>
+                        </div>
+                    </div>
+                    
+                    <a href="purchase-spoofer.html" class="purchase-button">PURCHASE NOW</a>
+                </div>
+                
+                <!-- R6 AI Aimbot Product Card -->
+                <div class="product-card" style="border-color: #ff3366;">
+                    <div class="flame" style="width: 48px; height: 64px; top: 20%; left: -16px; background: linear-gradient(to top, #ff3300, #ff9966);"></div>
+                    <div class="flame" style="width: 48px; height: 64px; top: 30%; right: -16px; background: linear-gradient(to top, #ff3300, #ff9966);"></div>
+                    <div class="glow" style="background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(255, 51, 102, 0.1) 70%, transparent 100%);"></div>
+                    
+                    <div class="product-image" style="background-color: #660033;">
+                        <!-- <div class="product-content">
+                            <h2 class="product-name" style="color: #ff3366; text-shadow: 0 0 15px rgba(255, 51, 102, 0.8);">R6 AI AIMBOT</h2>
+                            <p class="product-tagline" style="color: #ff9999;">Advanced AI-powered Aim Assistance</p>
+                            <p class="product-audience" style="color: #ff9999;">Next-gen technology for R6 players</p>
+                        </div>
+                        
+                        <div class="feature-tag tag-safe" style="border-left-color: #ff3366;">AI-POWERED</div>
+                        <div class="feature-tag tag-undetected" style="border-right-color: #ff9966;">UNBANNABLE</div> -->
+                        <img src="logo_3.png">
+                    </div>
+                    <h2 class="product-name" style="color: #ff3366; text-shadow: 0 0 15px rgba(255, 51, 102, 0.8);">R6 AI AIMBOT</h2>
+
+                    <div class="product-details">
+                        <div class="price-info">
+                            <p>Starting at:</p>
+                            <p class="price" style="color: #ff3366; text-shadow: 0 0 10px rgba(255, 51, 102, 0.7);">$4.00</p>
+                        </div>
+                        <div class="feature-badge" style="background-color: rgba(102, 0, 51, 0.3);">
+                            <p style="color: #ff9999;">Machine Learning</p>
+                        </div>
+                    </div>
+                    
+                    <a href="purchase-aimbot.html" class="purchase-button" style="background: linear-gradient(135deg, #ff3366, #cc0033); box-shadow: 0 0 15px rgba(255, 51, 102, 0.5);">PURCHASE NOW</a>
+                </div>
+                
+                <!-- R6 LUA Product Card -->
+                <div class="product-card" style="border-color: #00cc99;">
+                    <div class="flame" style="width: 48px; height: 64px; top: 20%; left: -16px; background: linear-gradient(to top, #00cc66, #66ffcc);"></div>
+                    <div class="flame" style="width: 48px; height: 64px; top: 30%; right: -16px; background: linear-gradient(to top, #00cc66, #66ffcc);"></div>
+                    <div class="glow" style="background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 204, 153, 0.1) 70%, transparent 100%);"></div>
+                    
+                    <div class="product-image" style="background-color: #003333;">
+                       <!--  <div class="product-content">
+                            <h2 class="product-name" style="color: #00cc99; text-shadow: 0 0 15px rgba(0, 204, 153, 0.8);">R6 LUA</h2>
+                            <p class="product-tagline" style="color: #66ffcc;">Powerful LUA Script Collection</p>
+                            <p class="product-audience" style="color: #66ffcc;">Customizable gaming enhancements</p>
+                        </div>
+                        
+                        <div class="feature-tag tag-safe" style="border-left-color: #00cc99;">CUSTOMIZABLE</div>
+                        <div class="feature-tag tag-undetected" style="border-right-color: #66ffcc;">LIGHTWEIGHT</div> -->
+                        <img src="logo_2.png">
+                    </div>
+                     <h2 class="product-name" style="color: #00cc99; text-shadow: 0 0 15px rgba(0, 204, 153, 0.8);">R6 LUA</h2>
+                    <div class="product-details">
+                        <div class="price-info">
+                            <p>Starting at:</p>
+                            <p class="price" style="color: #00cc99; text-shadow: 0 0 10px rgba(0, 204, 153, 0.7);">$5.00</p>
+                        </div>
+                        <div class="feature-badge" style="background-color: rgba(0, 51, 51, 0.3);">
+                            <p style="color: #66ffcc;">Script Library</p>
+                        </div>
+                    </div>
+                    
+                    <a href="purchase-lua-script.html" class="purchase-button" style="background: linear-gradient(135deg, #00cc99, #009966); box-shadow: 0 0 15px rgba(0, 204, 153, 0.5);">PURCHASE NOW</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Create floating particles for the background
+        function createParticles() {
+            const container = document.getElementById('particle-container');
+            if (!container) return;
+            
+            // Reduced particle count for better performance
+            const particleCount = 30; // Increased particle count for the wider display
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2-5px
+                const size = Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // More spread out positions - ensure better distribution
+                const sectionWidth = window.innerWidth / 6;
+                const sectionHeight = window.innerHeight / 5;
+                const sectionX = i % 6;
+                const sectionY = Math.floor(i / 6) % 5;
+                
+                const posX = (sectionX * sectionWidth) + (Math.random() * sectionWidth);
+                const posY = (sectionY * sectionHeight) + (Math.random() * sectionHeight);
+                
+                particle.style.left = `${posX}px`;
+                particle.style.top = `${posY}px`;
+                
+                // Random opacity and color - adjusted colors to match all three product themes
+                const opacity = Math.random() * 0.4 + 0.1;
+                const colorChoice = Math.random();
+                let hue;
+                
+                if (colorChoice < 0.33) {
+                    hue = 195; // Blue for Temp Spoofer
+                } else if (colorChoice < 0.66) {
+                    hue = 350; // Red for AI Aimbot
+                } else {
+                    hue = 160; // Green for LUA
+                }
+                
+                particle.style.backgroundColor = `hsla(${hue}, 100%, 70%, ${opacity})`;
+                
+                // Add to DOM
+                container.appendChild(particle);
+            }
+        }
+        
+        // Create flame effects
+        function createFlameEffects() {
+            const flames = document.querySelectorAll('.flame');
+            
+            // Add flickering effect to flames - slower interval for better performance
+            setInterval(() => {
+                flames.forEach(flame => {
+                    const scale = 0.8 + Math.random() * 0.3;
+                    const rotate = 30 + Math.random() * 20;
+                    flame.style.transform = `rotate(${rotate}deg) scale(${scale})`;
+                    
+                    const opacity = 0.4 + Math.random() * 0.2;
+                    flame.style.opacity = opacity;
+                });
+            }, 800); // Slower animation for less CPU usage
+        }
+        
+        // Initialize effects on page load
+        window.addEventListener('load', () => {
+            createParticles();
+            createFlameEffects();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antartica - Purchase Temp Spoofer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0e0e0e, #1a0404);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            max-width: 120px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: #66ccff;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .logo svg {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #66ccff;
+        }
+        
+        .product-section {
+            display: flex;
+            padding: 50px 5%;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .product-content {
+            width: 45%;
+        }
+        
+        .product-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .product-content h1 span {
+            color: #66ccff;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.8);
+        }
+        
+        .product-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        
+        .purchase-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(102, 204, 255, 0.1);
+            border: 1px solid #66ccff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .purchase-option:hover {
+            background: rgba(102, 204, 255, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .purchase-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #66ccff, #3399ff);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(102, 204, 255, 0.5);
+        }
+        
+        .purchase-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(102, 204, 255, 0.8);
+        }
+        
+        .product-image {
+            width: 50%;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .product-container {
+            position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(5deg) rotateY(-5deg);
+            transition: transform 0.5s;
+        }
+        
+        .product-container:hover {
+            transform: rotateX(0deg) rotateY(0deg);
+        }
+        
+        .product-image-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+        }
+        .product-info {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+        }
+
+        .product-info h2 {
+            color: rgb(102, 204, 255);
+            font-weight: bold;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+       
+        .product-info ul li {
+            text-decoration: none;
+            list-style-type: none;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .product-section {
+                flex-direction: column;
+            }
+            
+            .product-content, .product-image {
+                width: 100%;
+            }
+            
+            .product-content {
+                margin-bottom: 40px;
+            }
+            
+            .product-content h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 5L35 20L20 35L5 20L20 5Z" fill="#111111" stroke="#66ccff" stroke-width="2"/>
+                <path d="M20 12L28 20L20 28L12 20L20 12Z" fill="#66ccff"/>
+            </svg>
+            Antartica
+        </a>
+        <nav>
+            <ul>
+                 <li><a href="">
+                    <img style="width:40px" src="discord.png">
+                </a></li>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="product.html">PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="product-section">
+        <div class="product-content">
+            <h1>Purchase <span>Spoofer</span></h1>
+            <div class="purchase-option">
+                <div>
+                    <strong>1 Day License</strong>
+                    <p>1 Day License Usage to Revised Temp Spoofer</p>
+                </div>
+                <div>
+                    <span>$4.99</span>
+                    <a href="#" class="purchase-button">Buy Now</a>
+                </div>
+            </div>
+            <div class="purchase-option">
+                <div>
+                    <strong>Week License</strong>
+                    <p>7 Day License to Revised Temp Spoofer</p>
+                </div>
+                <div>
+                    <span>$14.99</span>
+                    <a href="#" class="purchase-button">Buy Now</a>
+                </div>
+            </div>
+            <div class="purchase-option">
+                <div>
+                    <strong>Month License</strong>
+                    <p>31 Day License to Revised Temp Spoofer</p>
+                </div>
+                <div>
+                    <span>$25.99</span>
+                    <a href="#" class="purchase-button">Buy Now</a>
+                </div>
+            </div>
+            <div class="purchase-option">
+                <div>
+                    <strong>Lifetime License</strong>
+                    <p>Lifetime Usage to Temp Spoofer</p>
+                </div>
+                <div>
+                    <span>$45.00</span>
+                    <a href="#" class="purchase-button">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-image">
+            <div class="product-container">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" class="product-image-svg">
+                    <!-- Background Shield -->
+                    <rect x="50" y="50" width="400" height="400" rx="20" fill="#1a1a1a" stroke="#66ccff" stroke-width="3"/>
+                    
+                    <!-- Shield Pattern -->
+                    <path d="M100,100 Q250,50 400,100 Q250,150 100,100 Z" fill="#222" stroke="#66ccff" stroke-width="2"/>
+                    <path d="M100,400 Q250,450 400,400 Q250,350 100,400 Z" fill="#222" stroke="#66ccff" stroke-width="2"/>
+                    
+                    <!-- Circuit-like Lines -->
+                    <path d="M150,200 Q250,150 350,200" fill="none" stroke="#66ccff" stroke-width="2" stroke-dasharray="5,5"/>
+                    <path d="M150,300 Q250,250 350,300" fill="none" stroke="#66ccff" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- Central Logo/Text -->
+                    <text x="50%" y="50%" text-anchor="middle" font-size="80" fill="#66ccff" font-weight="bold" font-family="Arial">
+                        PURCHASE
+                    </text>
+                    
+                    <!-- Protective Layers -->
+                    <rect x="100" y="150" width="300" height="200" rx="10" fill="none" stroke="#00ff66" stroke-width="2" stroke-dasharray="10,5"/>
+                    
+                    <!-- Glow Effects -->
+                    <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(102,204,255,0.2)" stroke-width="20"/>
+                    <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(102,204,255,0.1)" stroke-width="10"/>
+                </svg>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="product-info">
+        <h2>Information</h2>
+        <ul>
+            <li>🚀- Supported Across: Windows 10 & 11</li>
+            <li>🔓 - Supported on Intel/AMD CPU's</li>
+            <li>⭐ - Fixes Fortnite Tournament Hardware Kick</li>
+        </ul>
+
+        <h2 style="margin-top: 20px;">Working On:</h2>
+        <ul>
+            <li>Fortnite</li>
+            <li>Rust</li>
+            <li>Apex Legends</li>
+            <li>WZ/MW3</li>
+            <li>Rainbow Six Siege</li>
+            <li>Many More Games Are Supported...</li>
+        </ul>
+        
+    </section>
+
+
+
+</body>
+</html>

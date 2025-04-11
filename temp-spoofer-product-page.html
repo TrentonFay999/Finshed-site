@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antartica - Temp Spoofer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0e0e0e, #1a0404);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            max-width: 120px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: #66ccff;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.7);
+        }
+        
+        .logo svg {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #66ccff;
+        }
+        
+        .product-section {
+            display: flex;
+            padding: 50px 5%;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .product-content {
+            width: 45%;
+        }
+        
+        .product-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .product-content h1 span {
+            color: #66ccff;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.8);
+        }
+        
+        .product-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #66ccff, #3399ff);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(102, 204, 255, 0.5);
+        }
+        
+        .cta-button svg {
+            margin-right: 10px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(102, 204, 255, 0.8);
+        }
+        
+        .product-image {
+            width: 50%;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .product-container {
+            position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(5deg) rotateY(-5deg);
+            transition: transform 0.5s;
+        }
+        
+        .product-container:hover {
+            transform: rotateX(0deg) rotateY(0deg);
+        }
+        
+        .product-image-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+        }
+        
+        .fire-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><defs><radialGradient id="flame" cx="50%" cy="50%" r="50%" fx="50%" fy="50%"><stop offset="0%" stop-color="rgba(255, 100, 50, 0)" /><stop offset="100%" stop-color="rgba(255, 50, 0, 0)" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23flame)" /></svg>') center center no-repeat;
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .feature-tag {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 3;
+            box-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+        }
+        
+        .tag-safety {
+            top: 20%;
+            left: 5%;
+            border-left: 3px solid #66ccff;
+        }
+        
+        .tag-undetected {
+            bottom: 10%;
+            right: 5%;
+            border-right: 3px solid #ff3366;
+        }
+        
+        .tag-support {
+            top: 60%;
+            left: 5%;
+            border-left: 3px solid #00ff66;
+        }
+        
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(102, 204, 255, 0.1) 70%, transparent 100%);
+            animation: flicker 3s infinite ease-in-out;
+            z-index: 1;
+        }
+        
+        .flame {
+            position: absolute;
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            filter: blur(10px);
+            background: linear-gradient(to top, #ff3300, #ffcc00);
+            animation: flame 3s infinite alternate ease-in-out;
+            opacity: 0.6;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            z-index: 1;
+        }
+        
+        @keyframes flame {
+            0% { 
+                transform: rotate(45deg) scale(1); 
+                opacity: 0.6;
+            }
+            100% { 
+                transform: rotate(45deg) scale(1.2); 
+                opacity: 0.8;
+            }
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .product-section {
+                flex-direction: column;
+            }
+            
+            .product-content, .product-image {
+                width: 100%;
+            }
+            
+            .product-content {
+                margin-bottom: 40px;
+            }
+            
+            .product-content h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 5L35 20L20 35L5 20L20 5Z" fill="#111111" stroke="#66ccff" stroke-width="2"/>
+                <path d="M20 12L28 20L20 28L12 20L20 12Z" fill="#66ccff"/>
+            </svg>
+            Antartica
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">PRODUCTS</a></li>
+                <li><a href="#">REVIEWS</a></li>
+                <li><a href="#">STATUS</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="product-section">
+        <div class="product-content">
+            <h1>Temp <span>Spoofer</span></h1>
+            <p>Advanced anti-detection solution designed to keep you ahead of the game. Our Temp Spoofer provides unparalleled protection and anonymity, ensuring your gaming experience remains smooth and uninterrupted.</p>
+            <a href="#" class="cta-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 16H20M5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21ZM17.5 21C18.8807 21 20 19.8807 20 18.5C20 17.1193 18.8807 16 17.5 16C16.1193 16 15 17.1193 15 18.5C15 19.8807 16.1193 21 17.5 21Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Purchase now
+            </a>
+        </div>
+        
+        <div class="product-image">
+            <div class="product-container">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" class="product-image-svg">
+                    <!-- Background Shield -->
+                    <rect x="50" y="50" width="400" height="400" rx="20" fill="#1a1a1a" stroke="#66ccff" stroke-width="3"/>
+                    
+                    <!-- Shield Pattern -->
+                    <path d="M100,100 Q250,50 400,100 Q250,150 100,100 Z" fill="#222" stroke="#66ccff" stroke-width="2"/>
+                    <path d="M100,400 Q250,450 400,400 Q250,350 100,400 Z" fill="#222" stroke="#66ccff" stroke-width="2"/>
+                    
+                    <!-- Circuit-like Lines -->
+                    <path d="M150,200 Q250,150 350,200" fill="none" stroke="#66ccff" stroke-width="2" stroke-dasharray="5,5"/>
+                    <path d="M150,300 Q250,250 350,300" fill="none" stroke="#66ccff" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- Central Logo/Text -->
+                    <text x="50%" y="50%" text-anchor="middle" font-size="80" fill="#66ccff" font-weight="bold" font-family="Arial">
+                        SPOOF
+                    </text>
+                    
+                    <!-- Protective Layers -->
+                    <rect x="100" y="150" width="300" height="200" rx="10" fill="none" stroke="#00ff66" stroke-width="2" stroke-dasharray="10,5"/>
+                    
+                    <!-- Glow Effects -->
+                    <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(102,204,255,0.2)" stroke-width="20"/>
+                    <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(102,204,255,0.1)" stroke-width="10"/>
+                </svg>
+                
+                <div class="fire-effect"></div>
+                <div class="glow"></div>
+                
+                <!-- Flames around the product -->
+                <div class="flame" style="width: 50px; height: 70px; top: 20%; left: -5%;"></div>
+                <div class="flame" style="width: 60px; height: 90px; top: 60%; left: -8%;"></div>
+                <div class="flame" style="width: 40px; height: 60px; top: 40%; right: -5%;"></div>
+                <div class="flame" style="width: 70px; height: 100px; bottom: 10%; right: -10%;"></div>
+                <div class="flame" style="width: 45px; height: 65px; bottom: 5%; left: 20%;"></div>
+                
+                <div class="feature-tag tag-safety">100% SAFE</div>
+                <div class="feature-tag tag-undetected">UNDETECTED</div>
+                <div class="feature-tag tag-support">24/7 SUPPORT</div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Create floating particles for the background
+        function createParticles() {
+            const body = document.querySelector('body');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2-5px
+                const size = Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                particle.style.left = `${posX}px`;
+                particle.style.top = `${posY}px`;
+                
+                // Random opacity and color
+                const opacity = Math.random() * 0.5 + 0.2;
+                const hue = Math.random() > 0.5 ? 195 : 0; // Blue or red
+                particle.style.backgroundColor = `hsla(${hue}, 100%, 70%, ${opacity})`;
+                
+                // Add to DOM
+                body.appendChild(particle);
+                
+                //
